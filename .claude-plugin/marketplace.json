@@ -1,12 +1,15 @@
 {
   "name": "session-memory",
+  "metadata": {
+    "description": "Plugins for improving Claude Code's session context retention"
+  },
   "owner": {
     "name": "Edo Ceder"
   },
   "plugins": [
     {
       "name": "session-memory",
-      "source": ".",
+      "source": "./",
       "description": "Fights session drift by capturing decisions, state, and corrections — automatically around compaction, or manually when needed."
     }
   ]
