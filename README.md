@@ -54,10 +54,18 @@ Session Memory gives Claude a structured, decision-focused snapshot of the sessi
     │  MANUAL (anytime mid-session)   │
     └─────────────┬───────────────────┘
                   │
-    /session-memory-refresh
+    User types /session-memory-refresh
                   │
-    Same extraction + injection pipeline,
-    triggered on demand. Use when:
+    UserPromptSubmit hook fires BEFORE Claude processes the prompt
+                  │
+    prompt-refresh.sh detects the trigger,
+    runs the same extraction pipeline,
+    and injects the result into Claude's context
+                  │
+    Claude sees fresh memory already in context —
+    no tool calls needed, just acknowledges ✓
+                  │
+    Use when:
     • Claude is drifting or contradicting earlier decisions
     • Before a major code change or refactor
     • After a long stretch of tool-heavy work
@@ -124,7 +132,8 @@ session-memory/
 ├── hooks/
 │   ├── hooks.json            # Hook event bindings
 │   ├── extract.sh            # PreCompact: transcript → Haiku → memory file
-│   └── inject.sh             # SessionStart: memory file → Claude context
+│   ├── inject.sh             # SessionStart: memory file → Claude context
+│   └── prompt-refresh.sh     # UserPromptSubmit: trigger-based extraction + injection
 ├── commands/
 │   └── session-memory-refresh.md  # /session-memory-refresh (extract + inject)
 └── README.md
