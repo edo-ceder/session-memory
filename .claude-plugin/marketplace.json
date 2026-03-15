@@ -1,0 +1,13 @@
+{
+  "name": "session-memory",
+  "owner": {
+    "name": "Edo Ceder"
+  },
+  "plugins": [
+    {
+      "name": "session-memory",
+      "source": ".",
+      "description": "Fights session drift by capturing decisions, state, and corrections — automatically around compaction, or manually when needed."
+    }
+  ]
+}
